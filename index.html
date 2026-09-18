@@ -1,808 +1,686 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تحدي بطلة قواعد البيانات 🚀</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Tajawal Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <!-- Canvas Confetti Library -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  
-  <style>
-    body {
-      font-family: 'Tajawal', sans-serif;
-      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
-      min-height: 100vh;
-      color: #f8fafc;
-      user-select: none;
-    }
-    .glass-card {
-      background: rgba(30, 41, 59, 0.85);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    }
-    .pulse-glow {
-      animation: pulseGlow 2s infinite;
-    }
-    @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 0 15px rgba(99, 102, 241, 0.5); }
-      50% { box-shadow: 0 0 30px rgba(168, 85, 247, 0.8); }
-    }
-    .shake {
-      animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
-    }
-    @keyframes shake {
-      10%, 90% { transform: translate3d(-1px, 0, 0); }
-      20%, 80% { transform: translate3d(2px, 0, 0); }
-      30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-      40%, 60% { transform: translate3d(4px, 0, 0); }
-    }
-    .pop-in {
-      animation: popIn 0.4s ease-out forwards;
-    }
-    @keyframes popIn {
-      0% { opacity: 0; transform: scale(0.85); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-    .option-btn {
-      transition: all 0.2s ease;
-    }
-    .option-btn:hover:not(:disabled) {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
-    }
-    .timer-bar {
-      transition: width 1s linear;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحدي مبرمجات المستقبل 👑💻</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: radial-gradient(circle at top right, #1e1b4b 0%, #0f172a 60%, #090d16 100%);
+            min-height: 100vh;
+            color: #f8fafc;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .glass-option {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-option:hover:not(:disabled) {
+            background: rgba(236, 72, 153, 0.15);
+            border-color: rgba(244, 114, 182, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .glass-option.selected-correct {
+            background: rgba(16, 185, 129, 0.25) !important;
+            border-color: #10b981 !important;
+            color: #a7f3d0 !important;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .glass-option.selected-wrong {
+            background: rgba(239, 68, 68, 0.25) !important;
+            border-color: #ef4444 !important;
+            color: #fca5a5 !important;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+        }
+
+        .gold-text {
+            background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pink-text {
+            background: linear-gradient(135deg, #f472b6 0%, #ec4899 50%, #db2777 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .crown-glow {
+            filter: drop-shadow(0 0 15px rgba(245, 158, 11, 0.6));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+        }
+
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse-subtle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(0.98); }
+        }
+
+        /* Certificate Print Styling */
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+            }
+            .certificate-box {
+                border: 4px solid #d97706 !important;
+                background: #fff8f0 !important;
+                color: #000 !important;
+                box-shadow: none !important;
+            }
+        }
+    </style>
 </head>
-<body class="flex flex-col justify-between min-h-screen p-4 md:p-6">
+<body class="p-3 md:p-6 flex flex-col justify-between min-h-screen relative overflow-x-hidden">
 
-  <!-- TOP HEADER -->
-  <header class="max-w-4xl mx-auto w-full glass-card rounded-2xl p-4 mb-4 flex justify-between items-center">
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-xl font-bold">
-        <i class="fa-solid fa-database text-amber-300"></i>
-      </div>
-      <div>
-        <h1 class="font-extrabold text-lg md:text-xl text-indigo-300">تحدي بطلة قواعد البيانات</h1>
-        <p class="text-xs text-slate-400">الصف الثالث المتوسط - الحاسب الآلي | إعداد: أ. غادة العتيبي</p>
-      </div>
-    </div>
+    <!-- Background Particle Canvas -->
+    <canvas id="confetti-canvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
 
-    <!-- Sound & Stats Toggle -->
-    <div class="flex items-center gap-3">
-      <button id="soundToggleBtn" onclick="toggleSound()" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-300 transition">
-        <i id="soundIcon" class="fa-solid fa-volume-high"></i>
-      </button>
-      <div class="hidden md:flex items-center gap-2 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700 text-sm">
-        <i class="fa-solid fa-trophy text-amber-400"></i>
-        <span id="headerScore">0</span> <span class="text-xs text-slate-400">نقطة</span>
-      </div>
-    </div>
-  </header>
-
-  <!-- MAIN CONTAINER -->
-  <main class="max-w-4xl mx-auto w-full flex-grow flex flex-col justify-center">
-
-    <!-- 1. START SCREEN -->
-    <section id="startScreen" class="glass-card rounded-3xl p-6 md:p-10 text-center max-w-2xl mx-auto w-full pop-in">
-      <div class="w-24 h-24 mx-auto mb-6 bg-gradient-to-tr from-indigo-500 to-purple-600 rounded-3xl p-1 flex items-center justify-center pulse-glow">
-        <div class="w-full h-full bg-slate-900 rounded-[22px] flex items-center justify-center">
-          <i class="fa-solid fa-database text-5xl text-amber-400"></i>
-        </div>
-      </div>
-
-      <div class="inline-block bg-indigo-900/60 border border-indigo-400/40 text-amber-300 px-4 py-1.5 rounded-full text-xs font-bold mb-4 shadow-md">
-        ✨ إعداد: أ. غادة العتيبي
-      </div>
-
-      <h2 class="text-2xl md:text-3xl font-black mb-3 text-white">هل أنتِ جاهزة لتصبحي خبيرة في قواعد البيانات؟</h2>
-      <p class="text-slate-300 mb-6 text-sm md:text-base leading-relaxed">
-        انطلقي في رحلة تفاعلية شيقة! اختبري معارفكِ في المفاهيم الأساسية، رتّبي مراحل بناء قواعد البيانات، وصنّفي المكونات ببراعة لتحصلي على رتبة <span class="text-amber-400 font-bold">مهندسة قواعد البيانات المتميزة</span>!
-      </p>
-
-      <!-- Player Name Input -->
-      <div class="max-w-sm mx-auto mb-6">
-        <label for="playerNameInput" class="block text-right text-xs font-bold text-slate-400 mb-2">اسم البطلة:</label>
-        <div class="relative">
-          <i class="fa-solid fa-user-astronaut absolute right-3 top-3.5 text-indigo-400"></i>
-          <input type="text" id="playerNameInput" placeholder="أدخلي اسمكِ هنا..." value="بطلة الحاسب" class="w-full bg-slate-800 border border-slate-600 rounded-xl py-3 pr-10 pl-4 text-white text-sm focus:outline-none focus:border-indigo-500 transition">
-        </div>
-      </div>
-
-      <!-- Start Button -->
-      <button onclick="startGame()" class="w-full max-w-sm mx-auto bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:to-pink-600 text-white font-extrabold py-4 px-8 rounded-2xl shadow-lg transition transform hover:-translate-y-1 active:translate-y-0 text-lg flex items-center justify-center gap-3">
-        <i class="fa-solid fa-play"></i> ابدئي التحدي الآن
-      </button>
-    </section>
-
-    <!-- 2. GAME SCREEN -->
-    <section id="gameScreen" class="hidden glass-card rounded-3xl p-5 md:p-8 relative">
-      
-      <!-- Top Game HUD -->
-      <div class="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-700/80">
-        <!-- Player Info -->
-        <div class="flex items-center gap-2">
-          <span class="w-8 h-8 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-sm font-bold">
-            <i class="fa-solid fa-user"></i>
-          </span>
-          <span id="hudPlayerName" class="font-bold text-slate-200 text-sm">البطلة</span>
-        </div>
-
-        <!-- Stage Badge -->
-        <div class="bg-indigo-900/60 text-indigo-300 text-xs font-bold px-3 py-1.5 rounded-full border border-indigo-500/30">
-          المرحلة <span id="currentStageNum">1</span> من <span id="totalStagesNum">3</span>
-        </div>
-
-        <!-- Streak Multiplier -->
-        <div id="streakBadge" class="hidden bg-amber-500/20 text-amber-400 text-xs font-bold px-3 py-1.5 rounded-full border border-amber-500/40 animate-bounce">
-          🔥 مضاعف النقاط x<span id="streakCount">1</span>
-        </div>
-
-        <!-- Lives & Score -->
-        <div class="flex items-center gap-4">
-          <div class="flex items-center gap-1 text-red-500 text-lg" id="heartsContainer">
-            <i class="fa-solid fa-heart"></i>
-            <i class="fa-solid fa-heart"></i>
-            <i class="fa-solid fa-heart"></i>
-          </div>
-          <div class="bg-slate-800 px-3 py-1 rounded-xl font-bold text-amber-400 text-sm">
-            <span id="hudScore">0</span> XP
-          </div>
-        </div>
-      </div>
-
-      <!-- Lifelines / Power-ups -->
-      <div class="flex justify-center gap-3 mb-6">
-        <button id="btn5050" onclick="use5050()" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 px-3 py-1.5 rounded-xl text-xs font-bold text-indigo-300 flex items-center gap-1.5 transition disabled:opacity-40">
-          <i class="fa-solid fa-square-minus"></i> حذف إجابتين (50:50)
-        </button>
-        <button id="btnHint" onclick="useHint()" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 px-3 py-1.5 rounded-xl text-xs font-bold text-amber-300 flex items-center gap-1.5 transition disabled:opacity-40">
-          <i class="fa-solid fa-lightbulb"></i> تلميح ذكي
-        </button>
-      </div>
-
-      <!-- QUESTION CONTAINER -->
-      <div id="questionContainer" class="min-h-[260px] flex flex-col justify-center">
-        <!-- Questions injected via JS -->
-      </div>
-
-      <!-- Hint Modal / Notification -->
-      <div id="hintBox" class="hidden mt-4 p-3 bg-amber-500/10 border border-amber-500/30 rounded-xl text-amber-300 text-xs flex items-center gap-2">
-        <i class="fa-solid fa-circle-info text-base"></i>
-        <span id="hintText">التلميح سيظهر هنا...</span>
-      </div>
-
-    </section>
-
-    <!-- 3. END SCREEN -->
-    <section id="endScreen" class="hidden glass-card rounded-3xl p-6 md:p-10 text-center max-w-2xl mx-auto w-full pop-in">
-      <div id="trophyIconContainer" class="w-24 h-24 mx-auto mb-4 bg-amber-500/20 border-2 border-amber-400 rounded-full flex items-center justify-center text-amber-400 text-5xl">
-        <i class="fa-solid fa-trophy"></i>
-      </div>
-
-      <h2 id="endTitle" class="text-3xl font-black mb-2 text-white">مبروك يا بطلة! 🎉</h2>
-      <p id="endSubtitle" class="text-slate-300 text-sm mb-6">لقد أتممتِ تحدي قواعد البيانات بنجاح مرتفع!</p>
-
-      <!-- Stats Box -->
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-3 max-w-md mx-auto mb-6">
-        <div class="bg-slate-800/80 p-3 rounded-2xl border border-slate-700">
-          <span class="block text-xs text-slate-400 mb-1">النقاط الإجمالية</span>
-          <span id="finalScore" class="text-2xl font-black text-amber-400">0</span>
-        </div>
-        <div class="bg-slate-800/80 p-3 rounded-2xl border border-slate-700">
-          <span class="block text-xs text-slate-400 mb-1">الإجابات الصحيحة</span>
-          <span id="finalCorrect" class="text-2xl font-black text-emerald-400">0/0</span>
-        </div>
-        <div class="col-span-2 md:col-span-1 bg-slate-800/80 p-3 rounded-2xl border border-slate-700">
-          <span class="block text-xs text-slate-400 mb-1">الرتبة المستحقة</span>
-          <span id="finalRank" class="text-xs font-bold text-indigo-300">خبير ممتاز</span>
-        </div>
-      </div>
-
-      <!-- Action Buttons -->
-      <div class="flex flex-col sm:flex-row justify-center gap-3 max-w-md mx-auto">
-        <button onclick="startGame()" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-6 rounded-xl transition flex items-center justify-center gap-2 text-sm">
-          <i class="fa-solid fa-rotate-right"></i> إعادة اللعب
-        </button>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="max-w-4xl mx-auto w-full text-center mt-4 text-xs text-slate-500">
-    تحدي قواعد البيانات التفاعلي &copy; 2026 - مادة الحاسب الآلي للصف الثالث المتوسط | إعداد: أ. غادة العتيبي
-  </footer>
-
-  <!-- GAME SCRIPT -->
-  <script>
-    // Audio Synthesizer (Web Audio API)
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    let isMuted = false;
-
-    function playSound(type) {
-      if (isMuted) return;
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      
-      const now = audioCtx.currentTime;
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-
-      if (type === 'correct') {
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(523.25, now); // C5
-        osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.08); // E5
-        osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.16); // G5
-        gain.gain.setValueAtTime(0.2, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
-        osc.start(now);
-        osc.stop(now + 0.3);
-      } else if (type === 'wrong') {
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(180, now);
-        osc.frequency.exponentialRampToValueAtTime(100, now + 0.25);
-        gain.gain.setValueAtTime(0.25, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
-        osc.start(now);
-        osc.stop(now + 0.25);
-      } else if (type === 'click') {
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(440, now);
-        gain.gain.setValueAtTime(0.05, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
-        osc.start(now);
-        osc.stop(now + 0.05);
-      } else if (type === 'win') {
-        [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
-          const o = audioCtx.createOscillator();
-          const g = audioCtx.createGain();
-          o.connect(g);
-          g.connect(audioCtx.destination);
-          o.type = 'triangle';
-          o.frequency.setValueAtTime(freq, now + idx * 0.1);
-          g.gain.setValueAtTime(0.15, now + idx * 0.1);
-          g.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.1 + 0.2);
-          o.start(now + idx * 0.1);
-          o.stop(now + idx * 0.1 + 0.2);
-        });
-      }
-    }
-
-    function toggleSound() {
-      isMuted = !isMuted;
-      const soundIcon = document.getElementById('soundIcon');
-      if (isMuted) {
-        soundIcon.className = 'fa-solid fa-volume-xmark text-red-400';
-      } else {
-        soundIcon.className = 'fa-solid fa-volume-high text-slate-300';
-        playSound('click');
-      }
-    }
-
-    // GAME DATA & STAGES
-    const GAME_STAGES = [
-      // STAGE 1: Multiple Choice Questions (Core Concepts)
-      {
-        type: 'mcq',
-        title: 'المرحلة الأولى: مفاهيم قواعد البيانات الأساسية',
-        questions: [
-          {
-            id: 101,
-            q: "ما المفهوم العلمي الدقيق لقاعدة البيانات (Database)؟",
-            options: [
-              "مجموعة من البيانات المخزنة بشكل منظم ومترابط.",
-              "برنامج مخصص للرسم وتصميم الرسومات البيانية.",
-              "ملف نصي عادي يحتوي على معلومات عشوائية.",
-              "جهاز حاسوب مخصص لتخزين الملفات فقط."
-            ],
-            correct: 0,
-            hint: "تذكر أنها تجمع بيانات مترابطة بطريقة نصل إليها بسهولة."
-          },
-          {
-            id: 102,
-            q: "ما الوظيفة الأساسية لنظام إدارة قواعد البيانات (DBMS)؟",
-            options: [
-              "الاتصال بشبكة الإنترنت وتصفح المواقع الإلكترونية.",
-              "إنشاء قواعد البيانات وإدارتها والتحكم بها.",
-              "التحكم بالمكونات المادية مثل المعالج والذاكرة.",
-              "كتابة النصوص والتنسيقات المطبوعة فقط."
-            ],
-            correct: 1,
-            hint: "هو البرنامج المسؤول عن التطوير والإدارة والتحكم."
-          },
-          {
-            id: 103,
-            q: "في جدول بيانات المرضى، ماذا يمثل الصف الأفقي الذي يحوي كامل بيانات مريض واحد؟",
-            options: [
-              "الحقل (Field)",
-              "السجل (Record)",
-              "المفتاح الأساسي",
-              "نظام إدارة قواعد البيانات"
-            ],
-            correct: 1,
-            hint: "الصف الأفقي يمثل حالة أو كياناً كاملاً."
-          },
-          {
-            id: 104,
-            q: "في جدول بيانات المنتجات، ماذا يمثل العمود الذي يضم (سعر المنتج) لكل المنتجات؟",
-            options: [
-              "السجل (Record)",
-              "الحقل (Field)",
-              "الجدول (Table)",
-              "الملف (File)"
-            ],
-            correct: 1,
-            hint: "الأعمدة الراسية تخص معياراً أو خاصية محددة."
-          }
-        ]
-      },
-
-      // STAGE 2: Database Creation Phases Ordering
-      {
-        type: 'ordering',
-        title: 'المرحلة الثانية: الترتيب التسلسلي لبناء قاعدة البيانات',
-        instruction: 'قم برفع أو خفض الخطوات لترتيب مراحل بناء قاعدة البيانات بالترتيب التسلسلي الصحيح (من 1 إلى 6):',
-        correctOrder: [
-          "تحديد المتطلبات",
-          "تحليل المتطلبات",
-          "تصميم قاعدة البيانات",
-          "إنشاء قاعدة البيانات",
-          "اختبار قاعدة البيانات",
-          "صيانة قاعدة البيانات"
-        ],
-        hint: "نبدأ دائماً بـ (التحديد) ثم (التحليل) وننتهي بـ (الصيانة)."
-      },
-
-      // STAGE 3: Components Classification Challenge
-      {
-        type: 'classification',
-        title: 'المرحلة الثالثة: تحدي تصنيف المكونات',
-        instruction: 'حدد التصنيف الصحيح للعنصر المعروض أمامك:',
-        items: [
-          { item: 'بيانات المريض "خالد أحمد" بالكامل في مستشفى', target: 'سجل' },
-          { item: 'عمود "رقم الجوال" لجميع المشتركين', target: 'حقل' },
-          { item: 'برنامج Microsoft Access أو MySQL', target: 'نظام DBMS' },
-          { item: 'قائمة تضم جميع أسماء ودرجات الطلاب', target: 'جدول' }
-        ],
-        categories: ['سجل', 'حقل', 'نظام DBMS', 'جدول'],
-        hint: 'ركزي بين العمود (حقل) والصف الأفقي (سجل) والبرنامج المحرك (DBMS).'
-      }
-    ];
-
-    // STATE VARIABLES
-    let playerName = "بطلة الحاسب";
-    let currentStageIndex = 0;
-    let currentQuestionIndex = 0;
-    let score = 0;
-    let streak = 0;
-    let lives = 3;
-    let totalQuestionsCount = 0;
-    let totalCorrectAnswers = 0;
-
-    // Power-ups state
-    let hasUsed5050 = false;
-    let hasUsedHint = false;
-
-    // Ordering Stage State
-    let userOrderList = [];
-
-    // Classification Stage State
-    let classificationIndex = 0;
-
-    // INITIALIZATION
-    function startGame() {
-      playSound('click');
-      const input = document.getElementById('playerNameInput');
-      playerName = input.value.trim() || "بطلة الحاسب";
-
-      // Reset state
-      score = 0;
-      streak = 0;
-      lives = 3;
-      currentStageIndex = 0;
-      currentQuestionIndex = 0;
-      totalCorrectAnswers = 0;
-      hasUsed5050 = false;
-      hasUsedHint = false;
-
-      // Calculate total questions for metrics
-      totalQuestionsCount = GAME_STAGES[0].questions.length + 1 + GAME_STAGES[2].items.length;
-
-      // Update HUD
-      document.getElementById('hudPlayerName').innerText = playerName;
-      document.getElementById('hudScore').innerText = score;
-      document.getElementById('headerScore').innerText = score;
-      updateHeartsUI();
-
-      // UI Screens
-      document.getElementById('startScreen').classList.add('hidden');
-      document.getElementById('endScreen').classList.add('hidden');
-      document.getElementById('gameScreen').classList.remove('hidden');
-
-      loadCurrentStage();
-    }
-
-    function updateHeartsUI() {
-      const container = document.getElementById('heartsContainer');
-      container.innerHTML = '';
-      for (let i = 0; i < 3; i++) {
-        if (i < lives) {
-          container.innerHTML += '<i class="fa-solid fa-heart text-red-500 pop-in"></i>';
-        } else {
-          container.innerHTML += '<i class="fa-regular fa-heart text-slate-600"></i>';
-        }
-      }
-    }
-
-    function updateStreakUI() {
-      const badge = document.getElementById('streakBadge');
-      const countSpan = document.getElementById('streakCount');
-      if (streak > 1) {
-        countSpan.innerText = streak;
-        badge.classList.remove('hidden');
-      } else {
-        badge.classList.add('hidden');
-      }
-    }
-
-    function resetPowerupsUI() {
-      document.getElementById('hintBox').classList.add('hidden');
-      document.getElementById('btn5050').disabled = hasUsed5050;
-      document.getElementById('btnHint').disabled = hasUsedHint;
-    }
-
-    function startTimer(duration, onTimeout) {
-      clearInterval(timerInterval);
-      timeLeft = duration;
-      const bar = document.getElementById('timerBar');
-      bar.style.width = '100%';
-
-      timerInterval = setInterval(() => {
-        timeLeft--;
-        const percentage = (timeLeft / duration) * 100;
-        bar.style.width = percentage + '%';
-
-        if (percentage < 30) {
-          bar.className = 'bg-red-500 h-full w-full timer-bar';
-        } else if (percentage < 60) {
-          bar.className = 'bg-amber-400 h-full w-full timer-bar';
-        } else {
-          bar.className = 'bg-gradient-to-r from-emerald-400 to-indigo-500 h-full w-full timer-bar';
-        }
-
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          onTimeout();
-        }
-      }, 1000);
-    }
-
-    // STAGE ROUTER
-    function loadCurrentStage() {
-      resetPowerupsUI();
-      document.getElementById('currentStageNum').innerText = currentStageIndex + 1;
-      document.getElementById('totalStagesNum').innerText = GAME_STAGES.length;
-
-      const stage = GAME_STAGES[currentStageIndex];
-
-      if (stage.type === 'mcq') {
-        renderMCQQuestion();
-      } else if (stage.type === 'ordering') {
-        renderOrderingStage();
-      } else if (stage.type === 'classification') {
-        renderClassificationStage();
-      }
-    }
-
-    // 1. MCQ RENDERER & LOGIC
-    function renderMCQQuestion() {
-      const stage = GAME_STAGES[currentStageIndex];
-      const qData = stage.questions[currentQuestionIndex];
-
-      const container = document.getElementById('questionContainer');
-      container.innerHTML = `
-        <div class="pop-in">
-          <span class="inline-block bg-indigo-500/20 text-indigo-300 text-xs font-bold px-3 py-1 rounded-lg mb-3">
-            سؤال ${currentQuestionIndex + 1} من ${stage.questions.length}
-          </span>
-          <h3 class="text-lg md:text-xl font-bold mb-6 text-white leading-relaxed">${qData.q}</h3>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="optionsGrid">
-            ${qData.options.map((opt, idx) => `
-              <button onclick="handleMCQAnswer(${idx})" class="option-btn bg-slate-800/90 hover:bg-slate-700/90 border border-slate-700/80 p-4 rounded-2xl text-right text-slate-200 text-sm md:text-base font-semibold flex items-center gap-3">
-                <span class="w-7 h-7 rounded-lg bg-slate-700 text-indigo-300 flex items-center justify-center font-bold text-xs shrink-0">${idx + 1}</span>
-                <span>${opt}</span>
-              </button>
-            `).join('')}
-          </div>
-        </div>
-      `;
-    }
-
-    function handleMCQAnswer(selectedIndex) {
-      const stage = GAME_STAGES[currentStageIndex];
-      const qData = stage.questions[currentQuestionIndex];
-      const grid = document.getElementById('optionsGrid');
-      const buttons = grid.getElementsByTagName('button');
-
-      // Disable all buttons
-      for (let btn of buttons) btn.disabled = true;
-
-      if (selectedIndex === qData.correct) {
-        // Correct
-        playSound('correct');
-        streak++;
-        totalCorrectAnswers++;
-        const addedXP = 100 * (streak > 1 ? streak : 1);
-        score += addedXP;
-        document.getElementById('hudScore').innerText = score;
-        document.getElementById('headerScore').innerText = score;
-        updateStreakUI();
-
-        if (selectedIndex >= 0) {
-          buttons[selectedIndex].className = 'bg-emerald-600/90 border border-emerald-400 p-4 rounded-2xl text-right text-white font-bold flex items-center gap-3 pop-in';
-        }
-      } else {
-        // Wrong or Timeout
-        playSound('wrong');
-        streak = 0;
-        lives--;
-        updateHeartsUI();
-        updateStreakUI();
-
-        if (selectedIndex >= 0) {
-          buttons[selectedIndex].className = 'bg-red-600/90 border border-red-400 p-4 rounded-2xl text-right text-white font-bold flex items-center gap-3 shake';
-        }
-        // Highlight correct one
-        buttons[qData.correct].className = 'bg-emerald-600/90 border border-emerald-400 p-4 rounded-2xl text-right text-white font-bold flex items-center gap-3';
-
-        if (lives <= 0) {
-          setTimeout(endGame, 1500);
-          return;
-        }
-      }
-
-      setTimeout(() => {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < stage.questions.length) {
-          renderMCQQuestion();
-        } else {
-          // Next Stage
-          currentStageIndex++;
-          currentQuestionIndex = 0;
-          if (currentStageIndex < GAME_STAGES.length) {
-            loadCurrentStage();
-          } else {
-            endGame();
-          }
-        }
-      }, 1500);
-    }
-
-    // 2. ORDERING STAGE RENDERER & LOGIC
-    function renderOrderingStage() {
-      const stage = GAME_STAGES[currentStageIndex];
-      // Shuffle list initially for ordering challenge
-      if (userOrderList.length === 0) {
-        userOrderList = [...stage.correctOrder].sort(() => Math.random() - 0.5);
-      }
-
-      const container = document.getElementById('questionContainer');
-      container.innerHTML = `
-        <div class="pop-in">
-          <h3 class="text-lg md:text-xl font-bold mb-2 text-white">${stage.title}</h3>
-          <p class="text-xs md:text-sm text-slate-300 mb-4">${stage.instruction}</p>
-
-          <div class="space-y-2 mb-6" id="orderingList">
-            ${userOrderList.map((item, idx) => `
-              <div class="bg-slate-800 border border-slate-700 p-3 rounded-xl flex items-center justify-between text-sm text-slate-200">
-                <div class="flex items-center gap-3">
-                  <span class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">${idx + 1}</span>
-                  <span class="font-semibold">${item}</span>
+    <!-- Top Header Navigation -->
+    <header class="relative z-10 max-w-4xl mx-auto w-full mb-4 no-print">
+        <div class="glass-card rounded-2xl p-4 flex justify-between items-center gap-3">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center text-xl md:text-2xl shadow-lg">
+                    <i class="fa-solid fa-crown text-amber-300"></i>
                 </div>
-                <div class="flex gap-1">
-                  <button onclick="moveOrderItem(${idx}, -1)" ${idx === 0 ? 'disabled class="opacity-30 p-1.5"' : 'class="bg-slate-700 hover:bg-slate-600 p-1.5 rounded-lg text-xs text-indigo-300"'}>
-                    <i class="fa-solid fa-arrow-up"></i>
-                  </button>
-                  <button onclick="moveOrderItem(${idx}, 1)" ${idx === userOrderList.length - 1 ? 'disabled class="opacity-30 p-1.5"' : 'class="bg-slate-700 hover:bg-slate-600 p-1.5 rounded-lg text-xs text-indigo-300"'}>
-                    <i class="fa-solid fa-arrow-down"></i>
-                  </button>
+                <div>
+                    <h1 class="text-lg md:text-xl font-black gold-text tracking-wide">تحدي مبرمجات المستقبل 💎</h1>
+                    <p class="text-[11px] md:text-xs text-purple-200">المهارات الرقمية - الصف الثالث المتوسط</p>
+                    <p class="text-[10px] md:text-[11px] text-amber-300 font-bold">إعداد: أ. غادة العتيبي 🌸</p>
                 </div>
-              </div>
-            `).join('')}
-          </div>
+            </div>
 
-          <button onclick="checkOrderingAnswer()" class="w-full bg-gradient-to-r from-emerald-500 to-indigo-600 hover:from-emerald-600 hover:to-indigo-700 text-white font-bold py-3 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
-            <i class="fa-solid fa-circle-check"></i> تحقق من صحة الترتيب
-          </button>
+            <button onclick="toggleSound()" id="sound-btn" class="glass-card px-3 py-2 rounded-xl text-xs font-bold flex items-center gap-2 hover:bg-white/10 transition">
+                <i class="fa-solid fa-volume-high text-pink-400" id="sound-icon"></i>
+                <span id="sound-status" class="hidden sm:inline">الصوت مفعّل</span>
+            </button>
         </div>
-      `;
-    }
+    </header>
 
-    function moveOrderItem(index, direction) {
-      playSound('click');
-      const targetIndex = index + direction;
-      if (targetIndex < 0 || targetIndex >= userOrderList.length) return;
+    <main class="relative z-10 max-w-3xl mx-auto w-full flex-grow flex flex-col justify-center my-2">
 
-      const temp = userOrderList[index];
-      userOrderList[index] = userOrderList[targetIndex];
-      userOrderList[targetIndex] = temp;
+        <!-- 1. STUDENT REGISTRATION SCREEN -->
+        <section id="start-screen" class="w-full">
+            <div class="glass-card rounded-3xl p-6 sm:p-10 text-center space-y-6 relative overflow-hidden border-pink-500/30">
+                <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-amber-400 to-pink-500 p-1 mx-auto shadow-2xl floating">
+                    <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center text-4xl">
+                        👑
+                    </div>
+                </div>
 
-      renderOrderingStage();
-    }
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-black text-white">أهلاً بكِ في تحدي مبرمجات المستقبل! 🌸</h2>
+                    <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+                        أجيبي عن أسئلة درس **إنشاء قواعد البيانات** واكتشفي اللقب الملكي الذي تستحقينه اليوم!
+                    </p>
+                </div>
 
-    function checkOrderingAnswer() {
-      const stage = GAME_STAGES[currentStageIndex];
-      let isCorrect = true;
+                <!-- Titles Preview Box -->
+                <div class="p-4 bg-purple-950/40 rounded-2xl border border-purple-500/20 text-xs text-slate-200 text-right space-y-2">
+                    <div class="font-bold text-amber-300 text-sm mb-2 text-center">🏆 الألقاب المستهدفة في التحدي:</div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-center">
+                        <div class="bg-amber-500/10 p-2 rounded-xl border border-amber-400/30">
+                            <span class="block text-lg">👑</span>
+                            <span class="font-bold text-amber-300">ملكة البيانات</span>
+                            <span class="block text-[10px] text-slate-400">للدرجة الكاملة (100%)</span>
+                        </div>
+                        <div class="bg-pink-500/10 p-2 rounded-xl border border-pink-400/30">
+                            <span class="block text-lg">👸</span>
+                            <span class="font-bold text-pink-300">أميرة البيانات</span>
+                            <span class="block text-[10px] text-slate-400">للدرجات (80% - 90%)</span>
+                        </div>
+                        <div class="bg-purple-500/10 p-2 rounded-xl border border-purple-400/30">
+                            <span class="block text-lg">🌟</span>
+                            <span class="font-bold text-purple-300">نجمة البيانات</span>
+                            <span class="block text-[10px] text-slate-400">للدرجات (60% - 70%)</span>
+                        </div>
+                    </div>
+                </div>
 
-      for (let i = 0; i < stage.correctOrder.length; i++) {
-        if (userOrderList[i] !== stage.correctOrder[i]) {
-          isCorrect = false;
-          break;
+                <!-- Inputs Form -->
+                <div class="space-y-3 max-w-md mx-auto text-right">
+                    <div>
+                        <label class="text-xs font-bold text-pink-300 mb-1 block mr-1">اسم الطالبة الثلاثي:</label>
+                        <input type="text" id="student-name" placeholder="اكتبي اسمكِ هنا..." 
+                            class="w-full bg-slate-900/80 border border-purple-500/40 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-pink-500 font-bold text-base transition">
+                    </div>
+                </div>
+
+                <button onclick="startQuiz()" class="w-full max-w-md mx-auto py-4 bg-gradient-to-r from-amber-400 via-pink-500 to-purple-600 text-slate-950 font-black text-lg rounded-2xl shadow-xl hover:scale-105 transition duration-300 flex items-center justify-center gap-2">
+                    <span>انطلقي للتحدي الآن</span>
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- 2. QUIZ QUESTION SCREEN -->
+        <section id="quiz-screen" class="hidden w-full">
+            <div class="glass-card rounded-3xl p-5 sm:p-8 space-y-6 relative border-purple-500/30">
+                
+                <!-- Status & Progress Bar Header -->
+                <div class="space-y-2">
+                    <div class="flex justify-between items-center text-xs font-bold">
+                        <span id="question-progress-text" class="text-pink-300 bg-pink-500/20 px-3 py-1 rounded-full border border-pink-500/30">
+                            السؤال 1 من 5
+                        </span>
+                        <div class="flex items-center gap-2 text-amber-300 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
+                            <i class="fa-solid fa-star"></i>
+                            <span id="live-score">النقاط: 0</span>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="w-full h-2.5 bg-slate-900 rounded-full overflow-hidden border border-white/10">
+                        <div id="progress-bar-fill" class="h-full bg-gradient-to-r from-pink-500 to-amber-400 transition-all duration-300" style="width: 20%;"></div>
+                    </div>
+                </div>
+
+                <!-- Active Question Box -->
+                <div class="space-y-4 my-4">
+                    <div class="flex items-center gap-2 text-xs font-bold text-purple-300">
+                        <i class="fa-solid fa-circle-question text-pink-400"></i>
+                        <span id="question-category">المفهوم والأساسيات</span>
+                    </div>
+
+                    <h3 id="question-text" class="text-lg sm:text-xl font-extrabold text-white leading-relaxed min-h-[60px]">
+                        جاري تحميل السؤال...
+                    </h3>
+                </div>
+
+                <!-- Answer Options Matrix -->
+                <div id="options-container" class="grid grid-cols-1 gap-3">
+                    <!-- Dynamic option buttons generated via JS -->
+                </div>
+
+                <!-- Explanation Feedback Bar -->
+                <div id="feedback-box" class="hidden p-4 rounded-2xl text-xs sm:text-sm font-bold border transition-all animate-fade-in">
+                    <div id="feedback-title" class="font-extrabold text-base mb-1"></div>
+                    <div id="feedback-desc" class="text-slate-200 font-normal leading-relaxed"></div>
+                </div>
+
+                <!-- Next Button Container -->
+                <div class="flex justify-end pt-2">
+                    <button onclick="nextQuestion()" id="next-btn" disabled class="px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-600 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold rounded-xl shadow-lg hover:scale-105 transition flex items-center gap-2">
+                        <span>السؤال التالي</span>
+                        <i class="fa-solid fa-arrow-left text-xs"></i>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. FINAL RESULTS & TITLE CEREMONY SCREEN -->
+        <section id="result-screen" class="hidden w-full">
+            <div class="glass-card certificate-box rounded-3xl p-6 sm:p-10 text-center space-y-6 relative overflow-hidden border-amber-400/50 shadow-2xl">
+                
+                <!-- Background Glow Elements -->
+                <div class="absolute -top-12 -right-12 w-40 h-40 bg-amber-400/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-12 -left-12 w-40 h-40 bg-pink-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <!-- Title Crown Badge Icon -->
+                <div class="relative inline-block my-2">
+                    <div id="final-badge-icon" class="w-28 h-28 rounded-full bg-gradient-to-tr from-amber-400 via-pink-500 to-purple-600 p-1 mx-auto shadow-2xl flex items-center justify-center text-6xl floating crown-glow">
+                        👑
+                    </div>
+                </div>
+
+                <div>
+                    <span class="text-xs text-amber-300 font-extrabold tracking-widest uppercase bg-amber-400/10 px-4 py-1.5 rounded-full border border-amber-400/20">
+                        نتيجة التحدي وإحراز اللقب 🏆
+                    </span>
+                    
+                    <h2 id="final-title-name" class="text-3xl sm:text-4xl font-black mt-3 gold-text">
+                        ملكة البيانات 👑
+                    </h2>
+                    
+                    <p class="text-base text-slate-200 mt-2 font-bold">
+                        مبارك للطالبة المتميزة: <span id="res-student-name" class="text-pink-300 underline font-black">---</span>
+                    </p>
+                    <p class="text-xs text-amber-300 font-bold mt-1">إعداد المعلمة: أ. غادة العتيبي 🌸</p>
+                </div>
+
+                <!-- Stats Cards Grid -->
+                <div class="grid grid-cols-3 gap-3 max-w-md mx-auto my-4 text-center">
+                    <div class="p-3 bg-white/5 rounded-2xl border border-white/10">
+                        <span class="block text-xs text-slate-400 mb-1">الدرجة المكتسبة</span>
+                        <span id="res-score" class="text-xl font-black text-amber-300">100%</span>
+                    </div>
+                    <div class="p-3 bg-white/5 rounded-2xl border border-white/10">
+                        <span class="block text-xs text-slate-400 mb-1">الإجابات الصحيحة</span>
+                        <span id="res-correct-count" class="text-xl font-black text-emerald-400">5/5</span>
+                    </div>
+                    <div class="p-3 bg-white/5 rounded-2xl border border-white/10">
+                        <span class="block text-xs text-slate-400 mb-1">التقييم</span>
+                        <span id="res-rating" class="text-xl font-black text-pink-400">ممتاز 🌟</span>
+                    </div>
+                </div>
+
+                <!-- Title Encouragement Message -->
+                <p id="final-message" class="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto leading-relaxed bg-purple-900/30 p-4 rounded-2xl border border-purple-500/20">
+                    أداء استثنائي ومبهر! أثبتِ جدارتكِ الفائقة في فهم وإتقان مفاهيم قواعد البيانات ومكوناتها.
+                </p>
+
+                <!-- Actions Buttons (No-Print) -->
+                <div class="flex flex-wrap justify-center gap-3 pt-4 border-t border-white/10 no-print">
+                    <button onclick="window.print()" class="px-6 py-3 bg-purple-600/30 hover:bg-purple-600/50 text-purple-200 border border-purple-500/30 font-bold rounded-xl transition flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-print"></i>
+                        <span>طباعة الشهادة / حفظ PDF</span>
+                    </button>
+                    <button onclick="restartQuiz()" class="px-8 py-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:scale-105 transition flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        <span>إعادة التحدي</span>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="relative z-10 text-center py-3 text-xs text-slate-300 no-print space-y-1">
+        <p>نشاط فردي تقييمي مخصص لمادة المهارات الرقمية - الصف الثالث المتوسط 💾</p>
+        <p class="font-bold text-amber-300">إعداد المعلمة: أ. غادة العتيبي 🌸</p>
+    </footer>
+
+    <script>
+        // Questions Database aligned with 3rd Intermediate Database Creation Lesson
+        const quizQuestions = [
+            {
+                id: 1,
+                category: "مفهوم قاعدة البيانات",
+                question: "ما التعريف الدقيق والأصح لقاعدة البيانات (Database)؟",
+                options: [
+                    "مجموعة من البيانات المنظمة والمرتبطة ببعضها والتي يمكن استرجاعها وتعديلها بسهولة",
+                    "ملف مستند نصي عالي الجودة يُكتب على برنامج Word",
+                    "برنامج حاسوبي مخصص لتجميع مقاطع الفيديو والصور",
+                    "جهاز تخزين خارجي يُوصل بالحاسب للحفظ الاحتياطي"
+                ],
+                correct: 0,
+                explanation: "قاعدة البيانات هي مجموعة منظمة من البيانات المرتبطة منطقياً ببعضها، مما يسهل البحث فيها وإدارتها."
+            },
+            {
+                id: 2,
+                category: "مكونات الجدول",
+                question: "في جدول قاعدة البيانات، ماذا يُسمى العمود الرأسي الذي يحدد خاصية واحدة محددة؟",
+                options: [
+                    "السجل (Record)",
+                    "الحقل (Field)",
+                    "المفتاح الأساسي (Primary Key)",
+                    "الاستعلام (Query)"
+                ],
+                correct: 1,
+                explanation: "الحقل (Field) هو العمود الرأسي في الجدول، ويختص بنوع واحد من البيانات مثل (اسم الطالبة) أو (رقم الهاتف)."
+            },
+            {
+                id: 3,
+                category: "مكونات الجدول",
+                question: "الصف الأفقي الكامل في الجدول والذي يضم جميع البيانات الخاصة بطالبة واحدة يُسمى:",
+                options: [
+                    "الحقل (Field)",
+                    "السجل (Record)",
+                    "قاعدة البيانات (Database)",
+                    "نظام إدارة القواعد (DBMS)"
+                ],
+                correct: 1,
+                explanation: "السجل (Record) يمثل الصف الأفقي الكامل الذي يحتوي على كافة المعلومات المتعلقة بكيان أو عنصر واحد."
+            },
+            {
+                id: 4,
+                category: "المفتاح الأساسي",
+                question: "ما الميزة الفريدة التي تميز (المفتاح الأساسي Primary Key) عن باقي الحقول؟",
+                options: [
+                    "قيمته فريدة لا تتكرر إطلاقاً ولا يمكن أن تترك فارغة (Null)",
+                    "يحتوي دائماً على نصوص طويلة جداً",
+                    "يتغير قيمته تلقائياً كل يوم",
+                    "يمكن تكرار قيمته لجميع الطالبات بشكل عشوائي"
+                ],
+                correct: 0,
+                explanation: "المفتاح الأساسي يُستخدم لتمييز كل سجل بشكل فريد ومطلق (مثل رقم الهوية أو رقم الطالبة) ولا يتكرر."
+            },
+            {
+                id: 5,
+                category: "نظم إدارة قواعد البيانات",
+                question: "ما الاختصار العالمي الشهير لـ (نظام إدارة قواعد البيانات)؟",
+                options: [
+                    "HTML",
+                    "DBMS",
+                    "HTTP",
+                    "RAM"
+                ],
+                correct: 1,
+                explanation: "DBMS اختصار لـ Database Management System وهي البرامج المسؤولة عن بناء وتطوير وإدارة قواعد البيانات."
+            }
+        ];
+
+        // State Variables
+        let currentQuestionIdx = 0;
+        let score = 0;
+        let soundEnabled = true;
+        let studentInfo = { name: "", studentClass: "" };
+        let answered = false;
+
+        // Sound Effects Context (Web Audio API)
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function playSound(type) {
+            if (!soundEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new AudioCtx();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                const now = audioCtx.currentTime;
+
+                if (type === 'click') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(500, now);
+                    gain.gain.setValueAtTime(0.08, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+                    osc.start(now);
+                    osc.stop(now + 0.08);
+                } else if (type === 'correct') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, now); // C5
+                    osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
+                    osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+                    osc.start(now);
+                    osc.stop(now + 0.4);
+                } else if (type === 'wrong') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, now);
+                    osc.frequency.setValueAtTime(180, now + 0.12);
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+                    osc.start(now);
+                    osc.stop(now + 0.3);
+                } else if (type === 'fanfare') {
+                    const notes = [523.25, 659.25, 783.99, 1046.50];
+                    notes.forEach((freq, idx) => {
+                        const o = audioCtx.createOscillator();
+                        const g = audioCtx.createGain();
+                        o.connect(g);
+                        g.connect(audioCtx.destination);
+                        o.frequency.setValueAtTime(freq, now + idx * 0.12);
+                        g.gain.setValueAtTime(0.15, now + idx * 0.12);
+                        g.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.12 + 0.3);
+                        o.start(now + idx * 0.12);
+                        o.stop(now + idx * 0.12 + 0.3);
+                    });
+                }
+            } catch (e) {
+                console.log("Audio play exception", e);
+            }
         }
-      }
 
-      if (isCorrect) {
-        playSound('correct');
-        score += 300;
-        totalCorrectAnswers++;
-        document.getElementById('hudScore').innerText = score;
-        document.getElementById('headerScore').innerText = score;
-
-        alert('إجابة ممتازة! ترتيب مراحل بناء قاعدة البيانات صحيح 100% 🌟');
-      } else {
-        playSound('wrong');
-        lives--;
-        updateHeartsUI();
-        alert('الترتيب غير صحيح! الترتيب الصحيح هو:\n1. تحديد المتطلبات\n2. تحليل المتطلبات\n3. تصميم قاعدة البيانات\n4. إنشاء قاعدة البيانات\n5. اختبار قاعدة البيانات\n6. صيانة قاعدة البيانات');
-      }
-
-      userOrderList = [];
-      currentStageIndex++;
-      if (lives > 0 && currentStageIndex < GAME_STAGES.length) {
-        loadCurrentStage();
-      } else {
-        endGame();
-      }
-    }
-
-    // 3. CLASSIFICATION STAGE RENDERER & LOGIC
-    function renderClassificationStage() {
-      const stage = GAME_STAGES[currentStageIndex];
-      const currentItem = stage.items[classificationIndex];
-
-      const container = document.getElementById('questionContainer');
-      container.innerHTML = `
-        <div class="pop-in text-center">
-          <span class="inline-block bg-indigo-500/20 text-indigo-300 text-xs font-bold px-3 py-1 rounded-lg mb-3">
-            عنصر ${classificationIndex + 1} من ${stage.items.length}
-          </span>
-          <h3 class="text-base md:text-lg font-bold mb-2 text-slate-300">${stage.instruction}</h3>
-
-          <div class="bg-slate-800 border-2 border-indigo-500/50 rounded-2xl p-6 mb-6 max-w-lg mx-auto shadow-inner">
-            <i class="fa-solid fa-cube text-3xl text-amber-400 mb-2 block"></i>
-            <span class="text-lg md:text-xl font-extrabold text-white">${currentItem.item}</span>
-          </div>
-
-          <div class="grid grid-cols-2 gap-3 max-w-md mx-auto">
-            ${stage.categories.map(cat => `
-              <button onclick="handleClassificationAnswer('${cat}')" class="option-btn bg-slate-800 hover:bg-slate-700 border border-slate-600 p-4 rounded-xl text-white font-bold text-sm flex items-center justify-center gap-2">
-                <i class="fa-solid fa-tag text-indigo-400"></i> ${cat}
-              </button>
-            `).join('')}
-          </div>
-        </div>
-      `;
-    }
-
-    function handleClassificationAnswer(selectedCategory) {
-      const stage = GAME_STAGES[currentStageIndex];
-      const currentItem = stage.items[classificationIndex];
-
-      if (selectedCategory === currentItem.target) {
-        playSound('correct');
-        score += 150;
-        totalCorrectAnswers++;
-        document.getElementById('hudScore').innerText = score;
-        document.getElementById('headerScore').innerText = score;
-      } else {
-        playSound('wrong');
-        lives--;
-        updateHeartsUI();
-      }
-
-      classificationIndex++;
-      if (lives > 0 && classificationIndex < stage.items.length) {
-        renderClassificationStage();
-      } else {
-        classificationIndex = 0;
-        currentStageIndex++;
-        endGame();
-      }
-    }
-
-    // POWER-UPS LOGIC
-    function use5050() {
-      const stage = GAME_STAGES[currentStageIndex];
-      if (stage.type !== 'mcq' || hasUsed5050) return;
-
-      playSound('click');
-      hasUsed5050 = true;
-      document.getElementById('btn5050').disabled = true;
-
-      const qData = stage.questions[currentQuestionIndex];
-      const grid = document.getElementById('optionsGrid');
-      const buttons = grid.getElementsByTagName('button');
-
-      let removed = 0;
-      for (let i = 0; i < buttons.length; i++) {
-        if (i !== qData.correct && removed < 2) {
-          buttons[i].style.opacity = '0.2';
-          buttons[i].disabled = true;
-          removed++;
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            document.getElementById('sound-status').innerText = soundEnabled ? 'الصوت مفعّل' : 'الصوت مكتوم';
+            document.getElementById('sound-icon').className = soundEnabled ? 'fa-solid fa-volume-high text-pink-400' : 'fa-solid fa-volume-xmark text-slate-500';
         }
-      }
-    }
 
-    function useHint() {
-      const stage = GAME_STAGES[currentStageIndex];
-      if (hasUsedHint) return;
+        // Quiz Engine Functions
+        function startQuiz() {
+            const nameInput = document.getElementById('student-name').value.trim();
 
-      playSound('click');
-      hasUsedHint = true;
-      document.getElementById('btnHint').disabled = true;
+            if (!nameInput) {
+                alert("لطفاً اكتبي اسمكِ أولاً للبدء بالحصول على اللقب 🌸");
+                return;
+            }
 
-      const hintText = stage.hint || stage.questions[currentQuestionIndex]?.hint || "تذكر القواعد الأساسية للدرس!";
-      const hintBox = document.getElementById('hintBox');
-      document.getElementById('hintText').innerText = hintText;
-      hintBox.classList.remove('hidden');
-    }
+            studentInfo.name = nameInput;
 
-    // END GAME LOGIC
-    function endGame() {
-      document.getElementById('gameScreen').classList.add('hidden');
-      document.getElementById('endScreen').classList.remove('hidden');
+            playSound('click');
 
-      const endTitle = document.getElementById('endTitle');
-      const endSubtitle = document.getElementById('endSubtitle');
-      const finalScore = document.getElementById('finalScore');
-      const finalCorrect = document.getElementById('finalCorrect');
-      const finalRank = document.getElementById('finalRank');
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
 
-      finalScore.innerText = score;
-      finalCorrect.innerText = `${totalCorrectAnswers}/${totalQuestionsCount}`;
+            currentQuestionIdx = 0;
+            score = 0;
+            loadQuestion();
+        }
 
-      if (lives > 0 && score >= 500) {
-        playSound('win');
-        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-        endTitle.innerText = `كفو يا ${playerName}! 🎉`;
-        endSubtitle.innerText = 'أظهرتِ تميزاً وإتقاناً عالياً لمفاهيم قواعد البيانات!';
-        finalRank.innerText = '🥇 مهندسة قواعد بيانات خبيرة';
-        finalRank.className = 'text-xs font-bold text-amber-400';
-      } else if (lives > 0) {
-        playSound('win');
-        endTitle.innerText = `أحسنتِ يا ${playerName}! 👏`;
-        endSubtitle.innerText = 'نتيجة جيدة، ويمكنكِ المحاولة مجدداً للحصول على الدرجة الكاملة!';
-        finalRank.innerText = '🥈 مطورة قواعد بيانات متقدمة';
-        finalRank.className = 'text-xs font-bold text-emerald-400';
-      } else {
-        playSound('wrong');
-        endTitle.innerText = `محاولة جيدة يا ${playerName}! 💪`;
-        endSubtitle.innerText = 'نفدت المحاولات، راجعي المفاهيم وحاولي مرة أخرى لتصبحي الخبيرة الأولى!';
-        finalRank.innerText = '🥉 مبتدئة شجاعة';
-        finalRank.className = 'text-xs font-bold text-indigo-300';
-      }
-    }
-  </script>
+        function loadQuestion() {
+            answered = false;
+            const q = quizQuestions[currentQuestionIdx];
+
+            // Progress Update
+            const progressPercent = ((currentQuestionIdx + 1) / quizQuestions.length) * 100;
+            document.getElementById('progress-bar-fill').style.width = `${progressPercent}%`;
+            document.getElementById('question-progress-text').innerText = `السؤال ${currentQuestionIdx + 1} من ${quizQuestions.length}`;
+            document.getElementById('live-score').innerText = `النقاط: ${score}`;
+
+            // Question Details
+            document.getElementById('question-category').innerText = q.category;
+            document.getElementById('question-text').innerText = q.question;
+
+            // Reset Feedback Box
+            const feedbackBox = document.getElementById('feedback-box');
+            feedbackBox.className = "hidden p-4 rounded-2xl text-xs sm:text-sm font-bold border transition-all animate-fade-in";
+
+            // Options Generation
+            const container = document.getElementById('options-container');
+            container.innerHTML = q.options.map((opt, i) => `
+                <button onclick="handleSelectOption(${i})" class="glass-option option-btn w-full text-right p-4 rounded-2xl text-white font-medium text-sm flex items-center justify-between group">
+                    <div class="flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-xl bg-white/10 text-pink-300 font-bold text-xs flex items-center justify-center group-hover:bg-pink-500 group-hover:text-white transition">
+                            ${['أ', 'ب', 'ج', 'د'][i]}
+                        </span>
+                        <span>${opt}</span>
+                    </div>
+                    <i class="fa-regular fa-circle option-check-icon text-slate-500"></i>
+                </button>
+            `).join('');
+
+            document.getElementById('next-btn').disabled = true;
+        }
+
+        function handleSelectOption(optIdx) {
+            if (answered) return;
+            answered = true;
+
+            const q = quizQuestions[currentQuestionIdx];
+            const isCorrect = optIdx === q.correct;
+            const optionBtns = document.querySelectorAll('.option-btn');
+            const feedbackBox = document.getElementById('feedback-box');
+            const feedbackTitle = document.getElementById('feedback-title');
+            const feedbackDesc = document.getElementById('feedback-desc');
+
+            optionBtns.forEach((btn, idx) => {
+                btn.disabled = true;
+                const icon = btn.querySelector('.option-check-icon');
+
+                if (idx === q.correct) {
+                    btn.classList.add('selected-correct');
+                    icon.className = "fa-solid fa-circle-check text-emerald-400 text-base";
+                } else if (idx === optIdx && !isCorrect) {
+                    btn.classList.add('selected-wrong');
+                    icon.className = "fa-solid fa-circle-xmark text-red-400 text-base";
+                }
+            });
+
+            if (isCorrect) {
+                score += 10;
+                playSound('correct');
+                feedbackBox.className = "p-4 rounded-2xl text-xs sm:text-sm font-bold border bg-emerald-500/15 border-emerald-500/30 text-emerald-300 animate-fade-in";
+                feedbackTitle.innerText = "إجابة صحيحة وممتازة! ✨";
+            } else {
+                playSound('wrong');
+                feedbackBox.className = "p-4 rounded-2xl text-xs sm:text-sm font-bold border bg-red-500/15 border-red-500/30 text-red-300 animate-fade-in";
+                feedbackTitle.innerText = "إجابة خاطئة!";
+            }
+
+            feedbackDesc.innerText = q.explanation;
+            feedbackBox.classList.remove('hidden');
+
+            document.getElementById('live-score').innerText = `النقاط: ${score}`;
+            document.getElementById('next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            playSound('click');
+            currentQuestionIdx++;
+
+            if (currentQuestionIdx < quizQuestions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.remove('hidden');
+
+            const totalScorePossible = quizQuestions.length * 10;
+            const percentage = Math.round((score / totalScorePossible) * 100);
+            const correctCount = score / 10;
+
+            document.getElementById('res-student-name').innerText = studentInfo.name;
+            document.getElementById('res-score').innerText = `${percentage}%`;
+            document.getElementById('res-correct-count').innerText = `${correctCount}/${quizQuestions.length}`;
+
+            // Title Award Logic based on requested criteria
+            let titleName = "";
+            let titleBadge = "";
+            let message = "";
+            let rating = "";
+
+            if (percentage === 100) {
+                titleName = "ملكة البيانات 👑";
+                titleBadge = "👑";
+                rating = "استثنائي 👑";
+                message = "مبارك! حصلتِ على اللقب الأعلى (ملكة البيانات)! أظهرتِ استيعاباً كاملاً وبراعة فائقة في جميع عناصر ومفاهيم الدرس.";
+                triggerConfetti();
+                playSound('fanfare');
+            } else if (percentage >= 80) {
+                titleName = "أميرة البيانات 👸";
+                titleBadge = "👸";
+                rating = "ممتاز جداً 🌟";
+                message = "رائع جداً! استحققتِ بدارة لقب (أميرة البيانات) بفضل مجموعتك الممتازة من الإجابات الصحيحة والتفوق الواضح.";
+                triggerConfetti();
+                playSound('fanfare');
+            } else if (percentage >= 60) {
+                titleName = "نجمة البيانات 🌟";
+                titleBadge = "🌟";
+                rating = "جيد جداً ✨";
+                message = "أحسنتِ! حصلتِ على لقب (نجمة البيانات). أداء طيب يدل على فهمك الأساسي لمكونات ونظم قواعد البيانات.";
+                playSound('correct');
+            } else {
+                titleName = "مبدعة البيانات 🌸";
+                titleBadge = "🌸";
+                rating = "محاولة جيدة 🌸";
+                message = "جهد مشكور! حصلتِ على لقب (مبدعة البيانات). يمكنكِ مراجعة ملخص الدرس وإعادة التحدي للوصول للقب الملكة!";
+                playSound('correct');
+            }
+
+            document.getElementById('final-title-name').innerText = titleName;
+            document.getElementById('final-badge-icon').innerText = titleBadge;
+            document.getElementById('res-rating').innerText = rating;
+            document.getElementById('final-message').innerText = message;
+        }
+
+        function restartQuiz() {
+            playSound('click');
+            document.getElementById('result-screen').classList.add('hidden');
+            document.getElementById('start-screen').classList.remove('hidden');
+        }
+
+        // Particle Confetti Effect Generator
+        function triggerConfetti() {
+            const canvas = document.getElementById('confetti-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            const colors = ['#f59e0b', '#ec4899', '#8b5cf6', '#10b981', '#3b82f6'];
+
+            for (let i = 0; i < 120; i++) {
+                particles.push({
+                    x: canvas.width / 2,
+                    y: canvas.height / 2,
+                    vx: (Math.random() - 0.5) * 14,
+                    vy: (Math.random() - 0.5) * 14 - 3,
+                    size: Math.random() * 8 + 4,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    alpha: 1,
+                    rotation: Math.random() * 360
+                });
+            }
+
+            let animationFrame;
+            function render() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                let alive = false;
+
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.2; // Gravity
+                    p.alpha -= 0.008;
+
+                    if (p.alpha > 0) {
+                        alive = true;
+                        ctx.save();
+                        ctx.globalAlpha = p.alpha;
+                        ctx.translate(p.x, p.y);
+                        ctx.rotate((p.rotation * Math.PI) / 180);
+                        ctx.fillStyle = p.color;
+                        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                        ctx.restore();
+                    }
+                });
+
+                if (alive) {
+                    animationFrame = requestAnimationFrame(render);
+                } else {
+                    cancelAnimationFrame(animationFrame);
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            }
+
+            render();
+        }
+    </script>
 </body>
 </html>
