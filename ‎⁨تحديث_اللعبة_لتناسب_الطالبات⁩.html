@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تحدي بطلة قواعد البيانات 🚀</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Tajawal Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
+  <style>
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
+      min-height: 100vh;
+      color: #f8fafc;
+      user-select: none;
+    }
+    .glass-card {
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .pulse-glow {
+      animation: pulseGlow 2s infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 15px rgba(99, 102, 241, 0.5); }
+      50% { box-shadow: 0 0 30px rgba(168, 85, 247, 0.8); }
+    }
+    .shake {
+      animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+    }
+    @keyframes shake {
+      10%, 90% { transform: translate3d(-1px, 0, 0); }
+      20%, 80% { transform: translate3d(2px, 0, 0); }
+      30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+      40%, 60% { transform: translate3d(4px, 0, 0); }
+    }
+    .pop-in {
+      animation: popIn 0.4s ease-out forwards;
+    }
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.85); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .option-btn {
+      transition: all 0.2s ease;
+    }
+    .option-btn:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+    }
+    .timer-bar {
+      transition: width 1s linear;
+    }
+  </style>
+</head>
+<body class="flex flex-col justify-between min-h-screen p-4 md:p-6">
+
+  <!-- TOP HEADER -->
+  <header class="max-w-4xl mx-auto w-full glass-card rounded-2xl p-4 mb-4 flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-xl font-bold">
+        <i class="fa-solid fa-database text-amber-300"></i>
+      </div>
+      <div>
+        <h1 class="font-extrabold text-lg md:text-xl text-indigo-300">تحدي بطلة قواعد البيانات</h1>
+        <p class="text-xs text-slate-400">الصف الثالث المتوسط - الحاسب الآلي | إعداد: أ. غادة العتيبي</p>
+      </div>
+    </div>
+
+    <!-- Sound & Stats Toggle -->
+    <div class="flex items-center gap-3">
+      <button id="soundToggleBtn" onclick="toggleSound()" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-300 transition">
+        <i id="soundIcon" class="fa-solid fa-volume-high"></i>
+      </button>
+      <div class="hidden md:flex items-center gap-2 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700 text-sm">
+        <i class="fa-solid fa-trophy text-amber-400"></i>
+        <span id="headerScore">0</span> <span class="text-xs text-slate-400">نقطة</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-4xl mx-auto w-full flex-grow flex flex-col justify-center">
+
+    <!-- 1. START SCREEN -->
+    <section id="startScreen" class="glass-card rounded-3xl p-6 md:p-10 text-center max-w-2xl mx-auto w-full pop-in">
+      <div class="w-24 h-24 mx-auto mb-6 bg-gradient-to-tr from-indigo-500 to-purple-600 rounded-3xl p-1 flex items-center justify-center pulse-glow">
+        <div class="w-full h-full bg-slate-900 rounded-[22px] flex items-center justify-center">
+          <i class="fa-solid fa-database text-5xl text-amber-400"></i>
+        </div>
+      </div>
+
+      <div class="inline-block bg-indigo-900/60 border border-indigo-400/40 text-amber-300 px-4 py-1.5 rounded-full text-xs font-bold mb-4 shadow-md">
+        ✨ إعداد: أ. غادة العتيبي
+      </div>
+
+      <h2 class="text-2xl md:text-3xl font-black mb-3 text-white">هل أنتِ جاهزة لتصبحي خبيرة في قواعد البيانات؟</h2>
+      <p class="text-slate-300 mb-6 text-sm md:text-base leading-relaxed">
+        انطلقي في رحلة تفاعلية شيقة! اختبري معارفكِ في المفاهيم الأساسية، رتّبي مراحل بناء قواعد البيانات، وصنّفي المكونات ببراعة لتحصلي على رتبة <span class="text-amber-400 font-bold">مهندسة قواعد البيانات المتميزة</span>!
+      </p>
+
+      <!-- Player Name Input -->
+      <div class="max-w-sm mx-auto mb-6">
+        <label for="playerNameInput" class="block text-right text-xs font-bold text-slate-400 mb-2">اسم البطلة:</label>
+        <div class="relative">
+          <i class="fa-solid fa-user-astronaut absolute right-3 top-3.5 text-indigo-400"></i>
+          <input type="text" id="playerNameInput" placeholder="أدخلي اسمكِ هنا..." value="بطلة الحاسب" class="w-full bg-slate-800 border border-slate-600 rounded-xl py-3 pr-10 pl-4 text-white text-sm focus:outline-none focus:border-indigo-500 transition">
+        </div>
+      </div>
+
+      <!-- Start Button -->
+      <button onclick="startGame()" class="w-full max-w-sm mx-auto bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:to-pink-600 text-white font-extrabold py-4 px-8 rounded-2xl shadow-lg transition transform hover:-translate-y-1 active:translate-y-0 text-lg flex items-center justify-center gap-3">
+        <i class="fa-solid fa-play"></i> ابدئي التحدي الآن
+      </button>
+    </section>
+
+    <!-- 2. GAME SCREEN -->
+    <section id="gameScreen" class="hidden glass-card rounded-3xl p-5 md:p-8 relative">
+      
+      <!-- Top Game HUD -->
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-700/80">
+        <!-- Player Info -->
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-sm font-bold">
+            <i class="fa-solid fa-user"></i>
+          </span>
+          <span id="hudPlayerName" class="font-bold text-slate-200 text-sm">البطلة</span>
+        </div>
+
+        <!-- Stage Badge -->
+        <div class="bg-indigo-900/60 text-indigo-300 text-xs font-bold px-3 py-1.5 rounded-full border border-indigo-500/30">
+          المرحلة <span id="currentStageNum">1</span> من <span id="totalStagesNum">3</span>
+        </div>
+
+        <!-- Streak Multiplier -->
+        <div id="streakBadge" class="hidden bg-amber-500/20 text-amber-400 text-xs font-bold px-3 py-1.5 rounded-full border border-amber-500/40 animate-bounce">
+          🔥 مضاعف النقاط x<span id="streakCount">1</span>
+        </div>
+
+        <!-- Lives & Score -->
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-1 text-red-500 text-lg" id="heartsContainer">
+            <i class="fa-solid fa-heart"></i>
+            <i class="fa-solid fa-heart"></i>
+            <i class="fa-solid fa-heart"></i>
+          </div>
+          <div class="bg-slate-800 px-3 py-1 rounded-xl font-bold text-amber-400 text-sm">
+            <span id="hudScore">0</span> XP
+          </div>
+        </div>
+      </div>
+
+      <!-- Lifelines / Power-ups -->
+      <div class="flex justify-center gap-3 mb-6">
+        <button id="btn5050" onclick="use5050()" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 px-3 py-1.5 rounded-xl text-xs font-bold text-indigo-300 flex items-center gap-1.5 transition disabled:opacity-40">
+          <i class="fa-solid fa-square-minus"></i> حذف إجابتين (50:50)
+        </button>
+        <button id="btnHint" onclick="useHint()" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 px-3 py-1.5 rounded-xl text-xs font-bold text-amber-300 flex items-center gap-1.5 transition disabled:opacity-40">
+          <i class="fa-solid fa-lightbulb"></i> تلميح ذكي
+        </button>
+      </div>
+
+      <!-- QUESTION CONTAINER -->
+      <div id="questionContainer" class="min-h-[260px] flex flex-col justify-center">
+        <!-- Questions injected via JS -->
+      </div>
+
+      <!-- Hint Modal / Notification -->
+      <div id="hintBox" class="hidden mt-4 p-3 bg-amber-500/10 border border-amber-500/30 rounded-xl text-amber-300 text-xs flex items-center gap-2">
+        <i class="fa-solid fa-circle-info text-base"></i>
+        <span id="hintText">التلميح سيظهر هنا...</span>
+      </div>
+
+    </section>
+
+    <!-- 3. END SCREEN -->
+    <section id="endScreen" class="hidden glass-card rounded-3xl p-6 md:p-10 text-center max-w-2xl mx-auto w-full pop-in">
+      <div id="trophyIconContainer" class="w-24 h-24 mx-auto mb-4 bg-amber-500/20 border-2 border-amber-400 rounded-full flex items-center justify-center text-amber-400 text-5xl">
+        <i class="fa-solid fa-trophy"></i>
+      </div>
+
+      <h2 id="endTitle" class="text-3xl font-black mb-2 text-white">مبروك يا بطلة! 🎉</h2>
+      <p id="endSubtitle" class="text-slate-300 text-sm mb-6">لقد أتممتِ تحدي قواعد البيانات بنجاح مرتفع!</p>
+
+      <!-- Stats Box -->
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3 max-w-md mx-auto mb-6">
+        <div class="bg-slate-800/80 p-3 rounded-2xl border border-slate-700">
+          <span class="block text-xs text-slate-400 mb-1">النقاط الإجمالية</span>
+          <span id="finalScore" class="text-2xl font-black text-amber-400">0</span>
+        </div>
+        <div class="bg-slate-800/80 p-3 rounded-2xl border border-slate-700">
+          <span class="block text-xs text-slate-400 mb-1">الإجابات الصحيحة</span>
+          <span id="finalCorrect" class="text-2xl font-black text-emerald-400">0/0</span>
+        </div>
+        <div class="col-span-2 md:col-span-1 bg-slate-800/80 p-3 rounded-2xl border border-slate-700">
+          <span class="block text-xs text-slate-400 mb-1">الرتبة المستحقة</span>
+          <span id="finalRank" class="text-xs font-bold text-indigo-300">خبير ممتاز</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row justify-center gap-3 max-w-md mx-auto">
+        <button onclick="startGame()" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-6 rounded-xl transition flex items-center justify-center gap-2 text-sm">
+          <i class="fa-solid fa-rotate-right"></i> إعادة اللعب
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="max-w-4xl mx-auto w-full text-center mt-4 text-xs text-slate-500">
+    تحدي قواعد البيانات التفاعلي &copy; 2026 - مادة الحاسب الآلي للصف الثالث المتوسط | إعداد: أ. غادة العتيبي
+  </footer>
+
+  <!-- GAME SCRIPT -->
+  <script>
+    // Audio Synthesizer (Web Audio API)
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    let isMuted = false;
+
+    function playSound(type) {
+      if (isMuted) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (type === 'correct') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, now); // C5
+        osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.08); // E5
+        osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.16); // G5
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+        osc.start(now);
+        osc.stop(now + 0.3);
+      } else if (type === 'wrong') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(180, now);
+        osc.frequency.exponentialRampToValueAtTime(100, now + 0.25);
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      } else if (type === 'click') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(440, now);
+        gain.gain.setValueAtTime(0.05, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+        osc.start(now);
+        osc.stop(now + 0.05);
+      } else if (type === 'win') {
+        [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+          const o = audioCtx.createOscillator();
+          const g = audioCtx.createGain();
+          o.connect(g);
+          g.connect(audioCtx.destination);
+          o.type = 'triangle';
+          o.frequency.setValueAtTime(freq, now + idx * 0.1);
+          g.gain.setValueAtTime(0.15, now + idx * 0.1);
+          g.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.1 + 0.2);
+          o.start(now + idx * 0.1);
+          o.stop(now + idx * 0.1 + 0.2);
+        });
+      }
+    }
+
+    function toggleSound() {
+      isMuted = !isMuted;
+      const soundIcon = document.getElementById('soundIcon');
+      if (isMuted) {
+        soundIcon.className = 'fa-solid fa-volume-xmark text-red-400';
+      } else {
+        soundIcon.className = 'fa-solid fa-volume-high text-slate-300';
+        playSound('click');
+      }
+    }
+
+    // GAME DATA & STAGES
+    const GAME_STAGES = [
+      // STAGE 1: Multiple Choice Questions (Core Concepts)
+      {
+        type: 'mcq',
+        title: 'المرحلة الأولى: مفاهيم قواعد البيانات الأساسية',
+        questions: [
+          {
+            id: 101,
+            q: "ما المفهوم العلمي الدقيق لقاعدة البيانات (Database)؟",
+            options: [
+              "مجموعة من البيانات المخزنة بشكل منظم ومترابط.",
+              "برنامج مخصص للرسم وتصميم الرسومات البيانية.",
+              "ملف نصي عادي يحتوي على معلومات عشوائية.",
+              "جهاز حاسوب مخصص لتخزين الملفات فقط."
+            ],
+            correct: 0,
+            hint: "تذكر أنها تجمع بيانات مترابطة بطريقة نصل إليها بسهولة."
+          },
+          {
+            id: 102,
+            q: "ما الوظيفة الأساسية لنظام إدارة قواعد البيانات (DBMS)؟",
+            options: [
+              "الاتصال بشبكة الإنترنت وتصفح المواقع الإلكترونية.",
+              "إنشاء قواعد البيانات وإدارتها والتحكم بها.",
+              "التحكم بالمكونات المادية مثل المعالج والذاكرة.",
+              "كتابة النصوص والتنسيقات المطبوعة فقط."
+            ],
+            correct: 1,
+            hint: "هو البرنامج المسؤول عن التطوير والإدارة والتحكم."
+          },
+          {
+            id: 103,
+            q: "في جدول بيانات المرضى، ماذا يمثل الصف الأفقي الذي يحوي كامل بيانات مريض واحد؟",
+            options: [
+              "الحقل (Field)",
+              "السجل (Record)",
+              "المفتاح الأساسي",
+              "نظام إدارة قواعد البيانات"
+            ],
+            correct: 1,
+            hint: "الصف الأفقي يمثل حالة أو كياناً كاملاً."
+          },
+          {
+            id: 104,
+            q: "في جدول بيانات المنتجات، ماذا يمثل العمود الذي يضم (سعر المنتج) لكل المنتجات؟",
+            options: [
+              "السجل (Record)",
+              "الحقل (Field)",
+              "الجدول (Table)",
+              "الملف (File)"
+            ],
+            correct: 1,
+            hint: "الأعمدة الراسية تخص معياراً أو خاصية محددة."
+          }
+        ]
+      },
+
+      // STAGE 2: Database Creation Phases Ordering
+      {
+        type: 'ordering',
+        title: 'المرحلة الثانية: الترتيب التسلسلي لبناء قاعدة البيانات',
+        instruction: 'قم برفع أو خفض الخطوات لترتيب مراحل بناء قاعدة البيانات بالترتيب التسلسلي الصحيح (من 1 إلى 6):',
+        correctOrder: [
+          "تحديد المتطلبات",
+          "تحليل المتطلبات",
+          "تصميم قاعدة البيانات",
+          "إنشاء قاعدة البيانات",
+          "اختبار قاعدة البيانات",
+          "صيانة قاعدة البيانات"
+        ],
+        hint: "نبدأ دائماً بـ (التحديد) ثم (التحليل) وننتهي بـ (الصيانة)."
+      },
+
+      // STAGE 3: Components Classification Challenge
+      {
+        type: 'classification',
+        title: 'المرحلة الثالثة: تحدي تصنيف المكونات',
+        instruction: 'حدد التصنيف الصحيح للعنصر المعروض أمامك:',
+        items: [
+          { item: 'بيانات المريض "خالد أحمد" بالكامل في مستشفى', target: 'سجل' },
+          { item: 'عمود "رقم الجوال" لجميع المشتركين', target: 'حقل' },
+          { item: 'برنامج Microsoft Access أو MySQL', target: 'نظام DBMS' },
+          { item: 'قائمة تضم جميع أسماء ودرجات الطلاب', target: 'جدول' }
+        ],
+        categories: ['سجل', 'حقل', 'نظام DBMS', 'جدول'],
+        hint: 'ركزي بين العمود (حقل) والصف الأفقي (سجل) والبرنامج المحرك (DBMS).'
+      }
+    ];
+
+    // STATE VARIABLES
+    let playerName = "بطلة الحاسب";
+    let currentStageIndex = 0;
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let streak = 0;
+    let lives = 3;
+    let totalQuestionsCount = 0;
+    let totalCorrectAnswers = 0;
+
+    // Power-ups state
+    let hasUsed5050 = false;
+    let hasUsedHint = false;
+
+    // Ordering Stage State
+    let userOrderList = [];
+
+    // Classification Stage State
+    let classificationIndex = 0;
+
+    // INITIALIZATION
+    function startGame() {
+      playSound('click');
+      const input = document.getElementById('playerNameInput');
+      playerName = input.value.trim() || "بطلة الحاسب";
+
+      // Reset state
+      score = 0;
+      streak = 0;
+      lives = 3;
+      currentStageIndex = 0;
+      currentQuestionIndex = 0;
+      totalCorrectAnswers = 0;
+      hasUsed5050 = false;
+      hasUsedHint = false;
+
+      // Calculate total questions for metrics
+      totalQuestionsCount = GAME_STAGES[0].questions.length + 1 + GAME_STAGES[2].items.length;
+
+      // Update HUD
+      document.getElementById('hudPlayerName').innerText = playerName;
+      document.getElementById('hudScore').innerText = score;
+      document.getElementById('headerScore').innerText = score;
+      updateHeartsUI();
+
+      // UI Screens
+      document.getElementById('startScreen').classList.add('hidden');
+      document.getElementById('endScreen').classList.add('hidden');
+      document.getElementById('gameScreen').classList.remove('hidden');
+
+      loadCurrentStage();
+    }
+
+    function updateHeartsUI() {
+      const container = document.getElementById('heartsContainer');
+      container.innerHTML = '';
+      for (let i = 0; i < 3; i++) {
+        if (i < lives) {
+          container.innerHTML += '<i class="fa-solid fa-heart text-red-500 pop-in"></i>';
+        } else {
+          container.innerHTML += '<i class="fa-regular fa-heart text-slate-600"></i>';
+        }
+      }
+    }
+
+    function updateStreakUI() {
+      const badge = document.getElementById('streakBadge');
+      const countSpan = document.getElementById('streakCount');
+      if (streak > 1) {
+        countSpan.innerText = streak;
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+    }
+
+    function resetPowerupsUI() {
+      document.getElementById('hintBox').classList.add('hidden');
+      document.getElementById('btn5050').disabled = hasUsed5050;
+      document.getElementById('btnHint').disabled = hasUsedHint;
+    }
+
+    function startTimer(duration, onTimeout) {
+      clearInterval(timerInterval);
+      timeLeft = duration;
+      const bar = document.getElementById('timerBar');
+      bar.style.width = '100%';
+
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        const percentage = (timeLeft / duration) * 100;
+        bar.style.width = percentage + '%';
+
+        if (percentage < 30) {
+          bar.className = 'bg-red-500 h-full w-full timer-bar';
+        } else if (percentage < 60) {
+          bar.className = 'bg-amber-400 h-full w-full timer-bar';
+        } else {
+          bar.className = 'bg-gradient-to-r from-emerald-400 to-indigo-500 h-full w-full timer-bar';
+        }
+
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          onTimeout();
+        }
+      }, 1000);
+    }
+
+    // STAGE ROUTER
+    function loadCurrentStage() {
+      resetPowerupsUI();
+      document.getElementById('currentStageNum').innerText = currentStageIndex + 1;
+      document.getElementById('totalStagesNum').innerText = GAME_STAGES.length;
+
+      const stage = GAME_STAGES[currentStageIndex];
+
+      if (stage.type === 'mcq') {
+        renderMCQQuestion();
+      } else if (stage.type === 'ordering') {
+        renderOrderingStage();
+      } else if (stage.type === 'classification') {
+        renderClassificationStage();
+      }
+    }
+
+    // 1. MCQ RENDERER & LOGIC
+    function renderMCQQuestion() {
+      const stage = GAME_STAGES[currentStageIndex];
+      const qData = stage.questions[currentQuestionIndex];
+
+      const container = document.getElementById('questionContainer');
+      container.innerHTML = `
+        <div class="pop-in">
+          <span class="inline-block bg-indigo-500/20 text-indigo-300 text-xs font-bold px-3 py-1 rounded-lg mb-3">
+            سؤال ${currentQuestionIndex + 1} من ${stage.questions.length}
+          </span>
+          <h3 class="text-lg md:text-xl font-bold mb-6 text-white leading-relaxed">${qData.q}</h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="optionsGrid">
+            ${qData.options.map((opt, idx) => `
+              <button onclick="handleMCQAnswer(${idx})" class="option-btn bg-slate-800/90 hover:bg-slate-700/90 border border-slate-700/80 p-4 rounded-2xl text-right text-slate-200 text-sm md:text-base font-semibold flex items-center gap-3">
+                <span class="w-7 h-7 rounded-lg bg-slate-700 text-indigo-300 flex items-center justify-center font-bold text-xs shrink-0">${idx + 1}</span>
+                <span>${opt}</span>
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function handleMCQAnswer(selectedIndex) {
+      const stage = GAME_STAGES[currentStageIndex];
+      const qData = stage.questions[currentQuestionIndex];
+      const grid = document.getElementById('optionsGrid');
+      const buttons = grid.getElementsByTagName('button');
+
+      // Disable all buttons
+      for (let btn of buttons) btn.disabled = true;
+
+      if (selectedIndex === qData.correct) {
+        // Correct
+        playSound('correct');
+        streak++;
+        totalCorrectAnswers++;
+        const addedXP = 100 * (streak > 1 ? streak : 1);
+        score += addedXP;
+        document.getElementById('hudScore').innerText = score;
+        document.getElementById('headerScore').innerText = score;
+        updateStreakUI();
+
+        if (selectedIndex >= 0) {
+          buttons[selectedIndex].className = 'bg-emerald-600/90 border border-emerald-400 p-4 rounded-2xl text-right text-white font-bold flex items-center gap-3 pop-in';
+        }
+      } else {
+        // Wrong or Timeout
+        playSound('wrong');
+        streak = 0;
+        lives--;
+        updateHeartsUI();
+        updateStreakUI();
+
+        if (selectedIndex >= 0) {
+          buttons[selectedIndex].className = 'bg-red-600/90 border border-red-400 p-4 rounded-2xl text-right text-white font-bold flex items-center gap-3 shake';
+        }
+        // Highlight correct one
+        buttons[qData.correct].className = 'bg-emerald-600/90 border border-emerald-400 p-4 rounded-2xl text-right text-white font-bold flex items-center gap-3';
+
+        if (lives <= 0) {
+          setTimeout(endGame, 1500);
+          return;
+        }
+      }
+
+      setTimeout(() => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < stage.questions.length) {
+          renderMCQQuestion();
+        } else {
+          // Next Stage
+          currentStageIndex++;
+          currentQuestionIndex = 0;
+          if (currentStageIndex < GAME_STAGES.length) {
+            loadCurrentStage();
+          } else {
+            endGame();
+          }
+        }
+      }, 1500);
+    }
+
+    // 2. ORDERING STAGE RENDERER & LOGIC
+    function renderOrderingStage() {
+      const stage = GAME_STAGES[currentStageIndex];
+      // Shuffle list initially for ordering challenge
+      if (userOrderList.length === 0) {
+        userOrderList = [...stage.correctOrder].sort(() => Math.random() - 0.5);
+      }
+
+      const container = document.getElementById('questionContainer');
+      container.innerHTML = `
+        <div class="pop-in">
+          <h3 class="text-lg md:text-xl font-bold mb-2 text-white">${stage.title}</h3>
+          <p class="text-xs md:text-sm text-slate-300 mb-4">${stage.instruction}</p>
+
+          <div class="space-y-2 mb-6" id="orderingList">
+            ${userOrderList.map((item, idx) => `
+              <div class="bg-slate-800 border border-slate-700 p-3 rounded-xl flex items-center justify-between text-sm text-slate-200">
+                <div class="flex items-center gap-3">
+                  <span class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">${idx + 1}</span>
+                  <span class="font-semibold">${item}</span>
+                </div>
+                <div class="flex gap-1">
+                  <button onclick="moveOrderItem(${idx}, -1)" ${idx === 0 ? 'disabled class="opacity-30 p-1.5"' : 'class="bg-slate-700 hover:bg-slate-600 p-1.5 rounded-lg text-xs text-indigo-300"'}>
+                    <i class="fa-solid fa-arrow-up"></i>
+                  </button>
+                  <button onclick="moveOrderItem(${idx}, 1)" ${idx === userOrderList.length - 1 ? 'disabled class="opacity-30 p-1.5"' : 'class="bg-slate-700 hover:bg-slate-600 p-1.5 rounded-lg text-xs text-indigo-300"'}>
+                    <i class="fa-solid fa-arrow-down"></i>
+                  </button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <button onclick="checkOrderingAnswer()" class="w-full bg-gradient-to-r from-emerald-500 to-indigo-600 hover:from-emerald-600 hover:to-indigo-700 text-white font-bold py-3 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-circle-check"></i> تحقق من صحة الترتيب
+          </button>
+        </div>
+      `;
+    }
+
+    function moveOrderItem(index, direction) {
+      playSound('click');
+      const targetIndex = index + direction;
+      if (targetIndex < 0 || targetIndex >= userOrderList.length) return;
+
+      const temp = userOrderList[index];
+      userOrderList[index] = userOrderList[targetIndex];
+      userOrderList[targetIndex] = temp;
+
+      renderOrderingStage();
+    }
+
+    function checkOrderingAnswer() {
+      const stage = GAME_STAGES[currentStageIndex];
+      let isCorrect = true;
+
+      for (let i = 0; i < stage.correctOrder.length; i++) {
+        if (userOrderList[i] !== stage.correctOrder[i]) {
+          isCorrect = false;
+          break;
+        }
+      }
+
+      if (isCorrect) {
+        playSound('correct');
+        score += 300;
+        totalCorrectAnswers++;
+        document.getElementById('hudScore').innerText = score;
+        document.getElementById('headerScore').innerText = score;
+
+        alert('إجابة ممتازة! ترتيب مراحل بناء قاعدة البيانات صحيح 100% 🌟');
+      } else {
+        playSound('wrong');
+        lives--;
+        updateHeartsUI();
+        alert('الترتيب غير صحيح! الترتيب الصحيح هو:\n1. تحديد المتطلبات\n2. تحليل المتطلبات\n3. تصميم قاعدة البيانات\n4. إنشاء قاعدة البيانات\n5. اختبار قاعدة البيانات\n6. صيانة قاعدة البيانات');
+      }
+
+      userOrderList = [];
+      currentStageIndex++;
+      if (lives > 0 && currentStageIndex < GAME_STAGES.length) {
+        loadCurrentStage();
+      } else {
+        endGame();
+      }
+    }
+
+    // 3. CLASSIFICATION STAGE RENDERER & LOGIC
+    function renderClassificationStage() {
+      const stage = GAME_STAGES[currentStageIndex];
+      const currentItem = stage.items[classificationIndex];
+
+      const container = document.getElementById('questionContainer');
+      container.innerHTML = `
+        <div class="pop-in text-center">
+          <span class="inline-block bg-indigo-500/20 text-indigo-300 text-xs font-bold px-3 py-1 rounded-lg mb-3">
+            عنصر ${classificationIndex + 1} من ${stage.items.length}
+          </span>
+          <h3 class="text-base md:text-lg font-bold mb-2 text-slate-300">${stage.instruction}</h3>
+
+          <div class="bg-slate-800 border-2 border-indigo-500/50 rounded-2xl p-6 mb-6 max-w-lg mx-auto shadow-inner">
+            <i class="fa-solid fa-cube text-3xl text-amber-400 mb-2 block"></i>
+            <span class="text-lg md:text-xl font-extrabold text-white">${currentItem.item}</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 max-w-md mx-auto">
+            ${stage.categories.map(cat => `
+              <button onclick="handleClassificationAnswer('${cat}')" class="option-btn bg-slate-800 hover:bg-slate-700 border border-slate-600 p-4 rounded-xl text-white font-bold text-sm flex items-center justify-center gap-2">
+                <i class="fa-solid fa-tag text-indigo-400"></i> ${cat}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function handleClassificationAnswer(selectedCategory) {
+      const stage = GAME_STAGES[currentStageIndex];
+      const currentItem = stage.items[classificationIndex];
+
+      if (selectedCategory === currentItem.target) {
+        playSound('correct');
+        score += 150;
+        totalCorrectAnswers++;
+        document.getElementById('hudScore').innerText = score;
+        document.getElementById('headerScore').innerText = score;
+      } else {
+        playSound('wrong');
+        lives--;
+        updateHeartsUI();
+      }
+
+      classificationIndex++;
+      if (lives > 0 && classificationIndex < stage.items.length) {
+        renderClassificationStage();
+      } else {
+        classificationIndex = 0;
+        currentStageIndex++;
+        endGame();
+      }
+    }
+
+    // POWER-UPS LOGIC
+    function use5050() {
+      const stage = GAME_STAGES[currentStageIndex];
+      if (stage.type !== 'mcq' || hasUsed5050) return;
+
+      playSound('click');
+      hasUsed5050 = true;
+      document.getElementById('btn5050').disabled = true;
+
+      const qData = stage.questions[currentQuestionIndex];
+      const grid = document.getElementById('optionsGrid');
+      const buttons = grid.getElementsByTagName('button');
+
+      let removed = 0;
+      for (let i = 0; i < buttons.length; i++) {
+        if (i !== qData.correct && removed < 2) {
+          buttons[i].style.opacity = '0.2';
+          buttons[i].disabled = true;
+          removed++;
+        }
+      }
+    }
+
+    function useHint() {
+      const stage = GAME_STAGES[currentStageIndex];
+      if (hasUsedHint) return;
+
+      playSound('click');
+      hasUsedHint = true;
+      document.getElementById('btnHint').disabled = true;
+
+      const hintText = stage.hint || stage.questions[currentQuestionIndex]?.hint || "تذكر القواعد الأساسية للدرس!";
+      const hintBox = document.getElementById('hintBox');
+      document.getElementById('hintText').innerText = hintText;
+      hintBox.classList.remove('hidden');
+    }
+
+    // END GAME LOGIC
+    function endGame() {
+      document.getElementById('gameScreen').classList.add('hidden');
+      document.getElementById('endScreen').classList.remove('hidden');
+
+      const endTitle = document.getElementById('endTitle');
+      const endSubtitle = document.getElementById('endSubtitle');
+      const finalScore = document.getElementById('finalScore');
+      const finalCorrect = document.getElementById('finalCorrect');
+      const finalRank = document.getElementById('finalRank');
+
+      finalScore.innerText = score;
+      finalCorrect.innerText = `${totalCorrectAnswers}/${totalQuestionsCount}`;
+
+      if (lives > 0 && score >= 500) {
+        playSound('win');
+        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+        endTitle.innerText = `كفو يا ${playerName}! 🎉`;
+        endSubtitle.innerText = 'أظهرتِ تميزاً وإتقاناً عالياً لمفاهيم قواعد البيانات!';
+        finalRank.innerText = '🥇 مهندسة قواعد بيانات خبيرة';
+        finalRank.className = 'text-xs font-bold text-amber-400';
+      } else if (lives > 0) {
+        playSound('win');
+        endTitle.innerText = `أحسنتِ يا ${playerName}! 👏`;
+        endSubtitle.innerText = 'نتيجة جيدة، ويمكنكِ المحاولة مجدداً للحصول على الدرجة الكاملة!';
+        finalRank.innerText = '🥈 مطورة قواعد بيانات متقدمة';
+        finalRank.className = 'text-xs font-bold text-emerald-400';
+      } else {
+        playSound('wrong');
+        endTitle.innerText = `محاولة جيدة يا ${playerName}! 💪`;
+        endSubtitle.innerText = 'نفدت المحاولات، راجعي المفاهيم وحاولي مرة أخرى لتصبحي الخبيرة الأولى!';
+        finalRank.innerText = '🥉 مبتدئة شجاعة';
+        finalRank.className = 'text-xs font-bold text-indigo-300';
+      }
+    }
+  </script>
+</body>
+</html>
